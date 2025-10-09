@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { CourseItem } from "@/data/courses";
 import { Badge } from "@/components/ui/badge";
-import { Maximize2 } from "lucide-react";
+import { Maximize2, ArrowLeft, Target } from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 interface CoursePlayerProps {
   course: CourseItem;
@@ -12,7 +13,7 @@ interface CoursePlayerProps {
 
 export const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, onBack }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
+  const navigate = useNavigate();
   const lessons = useMemo(
     () => (course.topics || []).map((t, i) => ({
       title: t,
@@ -23,6 +24,11 @@ export const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, onBack }) =>
     })),
     [course]
   );
+
+  const handleOpenDetail = (id: any) => {
+      console.log("Open detail", id);
+      navigate(`/courses/${id}`);
+  }
 
   const [activeIdx, setActiveIdx] = useState(0);
   const activeLesson = lessons[activeIdx] ?? lessons[0];
@@ -64,9 +70,14 @@ export const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, onBack }) =>
             <div className="flex items-center gap-2">
               {onBack ? (
                 <Button variant="outline" size="sm" onClick={onBack} aria-label="Ortga qaytish">
+                    <ArrowLeft className="w-4 h-4" />
                   Ortga
                 </Button>
               ) : null}
+                <Button variant="outline" size="sm" aria-label="Ortga qaytish" onClick={() => handleOpenDetail(course.id)}>
+                    <Target className="w-4 h-4" />
+                    Yangi oynada ochish
+                </Button>
               <Button
                 size="icon"
                 variant="secondary"

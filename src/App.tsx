@@ -37,6 +37,7 @@ const App = () => (
             <Route path="/superadmin/course/:id" element={<SuperAdminCourseDetail />} />
             <Route path="/superadmin/settings" element={<SuperAdminSettings />} />
             <Route path="/student" element={<StudentPanel />} />
+            <Route path="/course-detail" element={<CourseDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
