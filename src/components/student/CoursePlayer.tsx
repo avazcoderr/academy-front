@@ -27,7 +27,7 @@ export const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, onBack }) =>
 
   const handleOpenDetail = (id: any) => {
       console.log("Open detail", id);
-      navigate(`/courses/${id}`);
+      navigate(`/course/${id}`);
   }
 
   const [activeIdx, setActiveIdx] = useState(0);
